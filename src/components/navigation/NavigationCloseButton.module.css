@@ -1,0 +1,35 @@
+.button {
+  position: fixed;
+  z-index: 40;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.button span {
+  position: absolute;
+  width: 17px;
+  height: 1px;
+  background: currentColor;
+}
+
+.button span:first-child {
+  transform: rotate(45deg);
+}
+
+.button span:last-child {
+  transform: rotate(-45deg);
+}
