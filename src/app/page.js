@@ -1,8 +1,12 @@
-export default function HomePage() {
+import DailyDish from "@/components/home/DailyDish";
+import getLatestPost from "@/lib/instagram/getLatestPost";
+
+export default async function Home() {
+  const post = await getLatestPost();
+
   return (
     <main>
-      <h1>CÉLESTE</h1>
-      <p>Une expérience, un art de recevoir.</p>
+      <DailyDish post={post} />
     </main>
   );
 }

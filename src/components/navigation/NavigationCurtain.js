@@ -10,7 +10,7 @@ const curtainTransition = {
   ease: [0.65, 0, 0.35, 1],
 };
 
-export default function NavigationCurtain({ item, position }) {
+export default function NavigationCurtain({ item, position, onNavigate }) {
   return (
     <motion.aside
       className={styles.curtain}
@@ -39,9 +39,13 @@ export default function NavigationCurtain({ item, position }) {
 
         <div className={styles.content}>
           {item.id === "search" ? (
-            <NavigationSearch />
+            <NavigationSearch onNavigate={onNavigate} />
           ) : (
-            <NavigationLinks key={item.id} items={item.subItems} />
+            <NavigationLinks
+              key={item.id}
+              items={item.subItems}
+              onNavigate={onNavigate}
+            />
           )}
         </div>
       </div>

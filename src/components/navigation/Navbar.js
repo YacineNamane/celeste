@@ -97,6 +97,7 @@ export default function Navbar() {
               key="navigation-curtain"
               item={selectedItem}
               position={panelPosition}
+              onNavigate={closeNavigation}
             />
 
             {!panelPosition.mobile && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 import { searchableContent } from "@/data/search/searchIndex";
@@ -14,27 +14,20 @@ function normalizeText(value = "") {
     .trim();
 }
 
-export default function NavigationSearch() {
+export default function NavigationSearch({ onNavigate }) {
   const [query, setQuery] = useState("");
 
-  const results = useMemo(() => {
-    const normalizedQuery = normalizeText(query);
+  const searchTerms = normalizeText(query).split(/\s+/).filter(Boolean);
 
-    if (!normalizedQuery) return [];
+  const results = searchTerms.length
+    ? searchableContent.filter((item) => {
+        const content = normalizeText(
+          [item.title, item.description, ...(item.keywords || [])].join(" "),
+        );
 
-    return searchableContent.filter((item) => {
-      const searchableText = [
-        item.title,
-        item.description,
-        ...(item.keywords || []),
-      ]
-        .filter(Boolean)
-        .map(normalizeText)
-        .join(" ");
-
-      return searchableText.includes(normalizedQuery);
-    });
-  }, [query]);
+        return searchTerms.every((term) => content.includes(term));
+      })
+    : [];
 
   return (
     <section className={styles.search}>
@@ -53,7 +46,12 @@ export default function NavigationSearch() {
         <div className={styles.results} aria-live="polite">
           {results.length > 0 ? (
             results.map((item) => (
-              <Link key={item.id} href={item.href} className={styles.result}>
+              <Link
+                key={item.id}
+                href={item.href}
+                className={styles.result}
+                onClick={onNavigate}
+              >
                 <div>
                   <span className={styles.title}>{item.title}</span>
 

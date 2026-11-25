@@ -29,7 +29,7 @@ const itemVariants = {
   },
 };
 
-export default function NavigationLinks({ items }) {
+export default function NavigationLinks({ items, onNavigate }) {
   return (
     <motion.nav
       className={styles.list}
@@ -44,7 +44,7 @@ export default function NavigationLinks({ items }) {
     >
       {items.map((item) => (
         <motion.div key={item.label} variants={itemVariants}>
-          <Link href={item.href} className={styles.link}>
+          <Link href={item.href} className={styles.link} onClick={onNavigate}>
             {item.label}
           </Link>
         </motion.div>

@@ -1,38 +1,39 @@
-import { navigationItems } from "@/data/navigation";
-
-function buildNavigationIndex() {
-  return navigationItems.flatMap((page) => {
-    if (page.id === "search") return [];
-
-    const pageEntry = {
-      id: `page-${page.id}`,
-      type: "Page",
-      title: page.label,
-      description: `Accéder à la page ${page.label}`,
-      keywords: [page.id],
-      href: page.href,
-    };
-
-    const navigationEntries = (page.subItems || []).map((item, index) => ({
-      id: `navigation-${page.id}-${index}`,
-      type: "Navigation",
-      title: item.label,
-      description: `Navigation : ${page.label}`,
-      keywords: [],
-      href: item.href,
-    }));
-
-    const anchorEntries = (page.anchors || []).map((anchor) => ({
-      id: `anchor-${page.id}-${anchor.id}`,
-      type: "Section",
-      title: anchor.label,
-      description: `Section de ${page.label}`,
-      keywords: anchor.keywords || [],
-      href: `${page.href}#${anchor.id}`,
-    }));
-
-    return [pageEntry, ...navigationEntries, ...anchorEntries];
-  });
-}
-
-export const searchableContent = [...buildNavigationIndex()];
+export const searchableContent = [
+  {
+    id: "home",
+    type: "Page",
+    title: "Accueil",
+    description: "Découvrir CÉLESTE.",
+    keywords: ["home", "restaurant"],
+    href: "/",
+  },
+  {
+    id: "contact",
+    type: "Page",
+    title: "Contact",
+    description: "Nous contacter.",
+    keywords: ["coordonnées", "adresse"],
+    href: "/contact",
+  },
+  {
+    id: "reservation",
+    type: "Page",
+    title: "Réservation",
+    description: "Réserver une table.",
+    keywords: ["réserver", "table"],
+    href: "/reservation",
+  },
+  {
+    id: "daily-dish",
+    type: "Section",
+    title: "Le plat du jour",
+    description: "Découvrez notre création culinaire du moment.",
+    keywords: [
+      "plat du jour",
+      "suggestion du jour",
+      "menu du jour",
+      "cuisine du moment",
+    ],
+    href: "/#plat-du-jour",
+  },
+];
