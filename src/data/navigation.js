@@ -12,6 +12,18 @@ export const navigationItems = [
     ],
   },
   {
+    id: "menu",
+    label: "Menu",
+    href: "/menu",
+    panelColor: "#34483b",
+    overlayColor: "rgba(52, 72, 59, 0.48)",
+    subItems: [
+      { label: "Découvrir la carte", href: "/menu" },
+      { label: "Accueil", href: "/" },
+      { label: "Réservation", href: "/reservation" },
+    ],
+  },
+  {
     id: "contact",
     label: "Contact",
     href: "/contact",
@@ -33,7 +45,6 @@ export const navigationItems = [
       { label: "Nous contacter", href: "/contact" },
     ],
   },
-
   {
     id: "search",
     label: "Recherche",
